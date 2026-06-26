@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shinuu 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  background:#0d0618;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Quicksand',sans-serif;
+  overflow:hidden;
+}
+
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.star{position:absolute;border-radius:50%;animation:twinkle ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.15;transform:scale(0.7)}50%{opacity:1;transform:scale(1.3)}}
+
+.shoot{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.shootstar{
+  position:absolute;width:120px;height:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,0),#fff,rgba(255,200,230,0.9));
+  border-radius:2px;animation:shoot linear infinite;opacity:0;
+}
+@keyframes shoot{0%{transform:translate(0,0) rotate(-30deg);opacity:0}5%{opacity:1}40%{opacity:0.6}60%,100%{transform:translate(600px,350px) rotate(-30deg);opacity:0}}
+
+.floaters{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.floater{position:absolute;bottom:-60px;font-size:18px;animation:floatUp linear infinite;opacity:0;}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg) scale(0.8);opacity:0}10%{opacity:0.9}90%{opacity:0.5}100%{transform:translateY(-105vh) rotate(20deg) scale(1.1);opacity:0}}
+
+.aurora{
+  position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 20% 80%,rgba(180,60,255,0.12) 0%,transparent 70%),radial-gradient(ellipse 70% 40% at 80% 20%,rgba(255,80,180,0.10) 0%,transparent 70%);
+  animation:auroraMove 8s ease-in-out infinite alternate;
+}
+@keyframes auroraMove{0%{opacity:0.6;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+
+/* ── Pages ── */
+.pages-wrapper{
+  position:relative;z-index:10;
+  width:340px;
+  overflow:hidden;
+}
+.pages-track{
+  display:flex;
+  transition:transform 0.7s cubic-bezier(.77,0,.18,1);
+  width:200%;
+}
+.page{
+  width:50%;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* ── Card shared ── */
+.card{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(24px);
+  border:1.5px solid rgba(255,150,220,0.2);
+  border-radius:36px;
+  padding:28px 22px 26px;
+  box-shadow:0 0 80px rgba(180,60,255,0.2),0 0 0 1px rgba(255,150,220,0.08);
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+
+.music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff6fb4,#c87fff);
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    z-index:9999;
+    box-shadow:0 0 15px rgba(200,127,255,.5);
+    transition:.3s;
+}
+
+.music-btn:hover{
+    transform:scale(1.1);
+}
+/* Page 1 card */
+.card1{animation:cardIn 0.8s cubic-bezier(.34,1.56,.64,1) both;}
+/* Page 2 card — different accent color teal→purple */
+.card2{
+  border-color:rgba(150,220,255,0.2);
+  box-shadow:0 0 80px rgba(60,180,255,0.18),0 0 0 1px rgba(150,220,255,0.08);
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(0.92)}to{opacity:1;transform:none}}
+
+/* ── Name ── */
+.top-name{
+  font-family:'Pacifico',cursive;
+  font-size:2.1rem;
+  background:linear-gradient(90deg,#ff8de8,#c87fff,#ff6fb4,#ffb3d9);
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:2px;
+  animation:shimmer 3s linear infinite,nameIn 0.9s cubic-bezier(.34,1.56,.64,1) 0.2s both;
+  filter:drop-shadow(0 0 16px rgba(200,127,255,0.7));
+}
+.top-name2{
+  font-family:'Pacifico',cursive;
+  font-size:1.9rem;
+  background:linear-gradient(90deg,#80e8ff,#a87fff,#60d4ff,#c8b0ff);
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:2px;
+  animation:shimmer 3s linear infinite;
+  filter:drop-shadow(0 0 16px rgba(100,200,255,0.7));
+}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+@keyframes nameIn{from{opacity:0;transform:scale(0.7) rotate(-5deg)}to{opacity:1;transform:none}}
+
+.deco-row{display:flex;gap:8px;font-size:18px;}
+.deco-row span{animation:wobble 2s ease-in-out infinite;}
+.deco-row span:nth-child(2){animation-delay:0.3s}
+.deco-row span:nth-child(3){animation-delay:0.6s}
+.deco-row span:nth-child(4){animation-delay:0.9s}
+.deco-row span:nth-child(5){animation-delay:1.2s}
+@keyframes wobble{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(10deg)}}
+
+/* ── GIF ring ── */
+.gif-ring{position:relative;width:165px;height:165px;}
+.gif-ring::before{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  background:conic-gradient(#ff6fb4,#c87fff,#ff8de8,#ffb3d9,#ff6fb4);
+  animation:spinRing 3s linear infinite;filter:blur(6px);opacity:0.8;z-index:0;
+}
+.gif-ring::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  background:conic-gradient(#ff6fb4,#c87fff,#ff8de8,#ff6fb4);
+  animation:spinRing 3s linear infinite;z-index:1;
+}
+/* Page 2 ring — blue/teal */
+.gif-ring2::before{
+  background:conic-gradient(#60d4ff,#a87fff,#80e8ff,#c8b0ff,#60d4ff) !important;
+}
+.gif-ring2::after{
+  background:conic-gradient(#60d4ff,#a87fff,#80e8ff,#60d4ff) !important;
+}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+
+.gif-inner{
+  position:absolute;inset:4px;border-radius:50%;
+  background:#0d0618;z-index:2;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.gif-inner img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.gif-fallback{font-size:56px;animation:wobble 2s ease-in-out infinite;}
+
+.orbit{position:absolute;inset:-14px;border-radius:50%;z-index:3;pointer-events:none;}
+.orbit-dot{
+  position:absolute;width:10px;height:10px;border-radius:50%;top:50%;left:50%;
+  background:#ff6fb4;box-shadow:0 0 8px #ff6fb4;
+  transform-origin:-68px 0;
+}
+.orbit-dot:nth-child(1){animation:orbitSpin 4s linear infinite;}
+.orbit-dot:nth-child(2){background:#c87fff;box-shadow:0 0 8px #c87fff;animation:orbitSpin 4s linear infinite;animation-delay:-1.33s;}
+.orbit-dot:nth-child(3){background:#ffb3d9;box-shadow:0 0 8px #ffb3d9;animation:orbitSpin 4s linear infinite;animation-delay:-2.66s;}
+/* Page 2 orbit dots */
+.orbit-dot2:nth-child(1){background:#60d4ff;box-shadow:0 0 8px #60d4ff;}
+.orbit-dot2:nth-child(2){background:#a87fff;box-shadow:0 0 8px #a87fff;}
+.orbit-dot2:nth-child(3){background:#c8b0ff;box-shadow:0 0 8px #c8b0ff;}
+@keyframes orbitSpin{to{transform:rotate(360deg) translateX(-68px) rotate(-360deg) translate(50%,-50%);}}
+
+/* ── Message ── */
+.msg{
+  background:rgba(255,140,210,0.06);
+  border:1px solid rgba(255,150,220,0.18);
+  border-radius:22px;padding:15px 18px;text-align:center;
+}
+.msg2{
+  background:rgba(100,200,255,0.06);
+  border:1px solid rgba(150,220,255,0.18);
+  border-radius:22px;padding:15px 18px;text-align:center;
+}
+.msg .highlight,.msg2 .highlight{
+  font-family:'Pacifico',cursive;font-size:1.05rem;display:block;margin-bottom:6px;
+}
+.msg .highlight{background:linear-gradient(90deg,#ff8de8,#c87fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.msg2 .highlight{background:linear-gradient(90deg,#80e8ff,#a87fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.msg p,.msg2 p{color:rgba(255,220,240,0.88);font-size:0.87rem;line-height:1.7;font-weight:600;}
+.msg2 p{color:rgba(200,240,255,0.9);}
+.cursor{display:inline-block;animation:blink 0.8s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── Emoji burst ── */
+.emoji-burst{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.ebtn{font-size:22px;cursor:default;animation:float3d 3s ease-in-out infinite;display:inline-block;filter:drop-shadow(0 0 6px rgba(200,127,255,0.6));}
+.ebtn:nth-child(2){animation-delay:0.5s}
+.ebtn:nth-child(3){animation-delay:1s}
+.ebtn:nth-child(4){animation-delay:1.5s}
+.ebtn:nth-child(5){animation-delay:2s}
+@keyframes float3d{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(8deg)}}
+
+/* ── Nav buttons ── */
+.nav-btn{
+  display:flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#ff6fb4,#c87fff);
+  border:none;border-radius:50px;padding:11px 22px;
+  color:#fff;font-family:'Quicksand',sans-serif;font-weight:700;font-size:0.88rem;
+  cursor:pointer;box-shadow:0 4px 20px rgba(200,127,255,0.4);
+  transition:transform 0.15s,box-shadow 0.15s;letter-spacing:0.5px;
+}
+.nav-btn:hover{transform:scale(1.06);box-shadow:0 6px 26px rgba(200,127,255,0.55);}
+.nav-btn.prev{background:linear-gradient(135deg,#60d4ff,#a87fff);}
+.nav-btn .arrow{font-size:16px;transition:transform 0.2s;}
+.nav-btn:hover .arrow{transform:translateX(4px);}
+.nav-btn.prev:hover .arrow{transform:translateX(-4px);}
+
+/* ── Footer ── */
+.footer{font-size:0.72rem;color:rgba(255,150,220,0.45);font-weight:700;letter-spacing:1px;text-align:center;}
+.pulse{display:inline-block;animation:hpulse 1s ease-in-out infinite;}
+@keyframes hpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+
+/* ── Page dots ── */
+.page-dots{display:flex;gap:8px;justify-content:center;margin-top:4px;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,150,220,0.25);transition:all 0.4s;}
+.dot.active{width:24px;background:linear-gradient(90deg,#ff6fb4,#c87fff);}
+
+/* ── Ripple ── */
+.ripple-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99;}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,110,180,0.3);transform:scale(0);animation:rippleAnim 0.8s ease-out forwards;pointer-events:none;}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+/* Page 2 sparkle burst animation */
+@keyframes sparkleIn{0%{opacity:0;transform:scale(0) rotate(-180deg)}60%{opacity:1;transform:scale(1.2) rotate(10deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.sparkle-anim{animation:sparkleIn 0.6s cubic-bezier(.34,1.56,.64,1) both;}
+</style>
+</head>
+<body>
+
+  <button class="music-btn" onclick="toggleMusic()">
+    🎵
+  </button>
+
+<div class="aurora"></div>
+<div class="stars" id="starsEl"></div>
+<div class="shoot" id="shootEl"></div>
+<div class="floaters" id="floatersEl"></div>
+<div class="ripple-container" id="rippleEl"></div>
+
+<div class="pages-wrapper">
+  <div class="pages-track" id="pagesTrack">
+
+    <!-- ══ PAGE 1 ══ -->
+    <div class="page">
+      <div class="card card1">
+        <div class="top-name">✨ Shinuu ✨</div>
+        <div class="deco-row"><span>💖</span><span>🌸</span><span>⭐</span><span>🌸</span><span>💖</span></div>
+
+        <div class="gif-ring">
+          <div class="orbit">
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="gif-inner">
+            <img src="1.gif" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="gif-fallback" style="display:none">🌸</div>
+          </div>
+        </div>
+
+        <div class="msg">
+          <span class="highlight">Meri Pyari Shinuu 💕</span>
+          <p id="typeText1"></p>
+        </div>
+
+        <div class="emoji-burst">
+          <span class="ebtn">💜</span><span class="ebtn">🦋</span><span class="ebtn">🌟</span><span class="ebtn">🌺</span><span class="ebtn">✨</span>
+        </div>
+
+        <button class="nav-btn" onclick="goTo(1)">
+          Next <span class="arrow">→</span>
+        </button>
+
+        <div class="footer">Made with <span class="pulse">💖</span> just for Shinuu</div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE 2 ══ -->
+    <div class="page">
+      <div class="card card2">
+        <div class="top-name2">🌟 Suno Shinuu 🌟</div>
+        <div class="deco-row"><span>💙</span><span>🌙</span><span>💫</span><span>🌙</span><span>💙</span></div>
+
+        <div class="gif-ring gif-ring2">
+          <div class="orbit">
+            <div class="orbit-dot orbit-dot2"></div>
+            <div class="orbit-dot orbit-dot2"></div>
+            <div class="orbit-dot orbit-dot2"></div>
+          </div>
+          <div class="gif-inner">
+            <img src="2.gif" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <div class="gif-fallback" style="display:none">💙</div>
+          </div>
+        </div>
+
+        <div class="msg2">
+          <span class="highlight">Rubyy ki shinuuu 🌙</span>
+          <p id="typeText2"></p>
+        </div>
+
+        <div class="emoji-burst">
+          <span class="ebtn">💙</span><span class="ebtn">🌙</span><span class="ebtn">💫</span><span class="ebtn">🦋</span><span class="ebtn">⭐</span>
+        </div>
+
+        <button class="nav-btn prev" onclick="goTo(0)">
+          <span class="arrow">←</span> Back
+        </button>
+
+        <div class="footer">Made with <span class="pulse">💖</span> just for Shinuu</div>
+      </div>
+    </div>
+
+  </div><!-- end pages-track -->
+ <audio id="bgMusic" loop>
+    <source src="tt.mp3" type="audio/mpeg">
+ </audio>
+  <!-- dots -->
+  <div class="page-dots" style="margin-top:14px;">
+    <div class="dot active" id="dot0"></div>
+    <div class="dot" id="dot1"></div>
+  </div>
+</div>
+
+<script>
+/* ── Stars ── */
+const starsEl=document.getElementById('starsEl');
+for(let i=0;i<100;i++){
+  const s=document.createElement('div');s.className='star';
+  const sz=Math.random()*3+1;
+  const col=['#fff','#ffb3d9','#d9a8ff','#ffe4f3','#b0e8ff'][Math.floor(Math.random()*5)];
+  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${col};animation-duration:${1.5+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
+  starsEl.appendChild(s);
+}
+
+/* ── Shooting stars ── */
+const shootEl=document.getElementById('shootEl');
+for(let i=0;i<6;i++){
+  const s=document.createElement('div');s.className='shootstar';
+  s.style.cssText=`left:${Math.random()*60}%;top:${Math.random()*40}%;animation-duration:${5+Math.random()*8}s;animation-delay:${Math.random()*10}s;`;
+  shootEl.appendChild(s);
+}
+
+/* ── Floaters ── */
+const floatersEl=document.getElementById('floatersEl');
+const fEmoji=['💖','💕','🌸','✨','💜','🦋','⭐','🌟','💫','💙','🌙'];
+for(let i=0;i<18;i++){
+  const f=document.createElement('div');f.className='floater';
+  f.textContent=fEmoji[i%fEmoji.length];
+  f.style.cssText=`left:${Math.random()*95}%;font-size:${12+Math.random()*16}px;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*12}s;`;
+  floatersEl.appendChild(f);
+}
+
+/* ── Page nav ── */
+let currentPage=0;
+function goTo(n){
+  currentPage=n;
+  document.getElementById('pagesTrack').style.transform=`translateX(-${n*50}%)`;
+  document.getElementById('dot0').classList.toggle('active',n===0);
+  document.getElementById('dot1').classList.toggle('active',n===1);
+  if(n===1 && !page2Started){startTypewriter2();page2Started=true;}
+}
+
+/* ── Typewriter page 1 ── */
+const msgs1=[
+  'Tum duniya ki sabse cute aur pyari ladki ho! 🌸',
+  'Tumhari smile se sab roshan ho jaata hai ✨',
+  'Har din tumhara special ho jaise tum special ho 💜',
+];
+let mi1=0,ci1=0;
+function type1(){
+  const el=document.getElementById('typeText1');
+  if(ci1<=msgs1[mi1].length){
+    el.innerHTML=msgs1[mi1].slice(0,ci1)+'<span class="cursor">|</span>';
+    ci1++;setTimeout(type1,45);
+  } else {
+    setTimeout(()=>{
+      let d=msgs1[mi1].length;
+      function erase(){if(d>=0){el.innerHTML=msgs1[mi1].slice(0,d)+'<span class="cursor">|</span>';d--;setTimeout(erase,25);}else{mi1=(mi1+1)%msgs1.length;ci1=0;setTimeout(type1,400);}}
+      setTimeout(erase,2000);
+    },1000);
+  }
+}
+setTimeout(type1,1200);
+
+/* ── Typewriter page 2 ── */
+const msgs2=[
+  'Tum is GIF se bhi zyada cute ho, bilkul sachchi! 💙',
+  'Duniya mein koi tumjaise pyara nahi hai, koi bhi nahi 🌙',
+  'Allah ne tumhe banaya to sabse pehle muskuraya hoga 💫',
+  'Tumhari ek jhalak se dil khush ho jaata hai! ⭐',
+];
+let mi2=0,ci2=0,page2Started=false;
+function startTypewriter2(){setTimeout(type2,400);}
+function type2(){
+  const el=document.getElementById('typeText2');
+  if(ci2<=msgs2[mi2].length){
+    el.innerHTML=msgs2[mi2].slice(0,ci2)+'<span class="cursor">|</span>';
+    ci2++;setTimeout(type2,45);
+  } else {
+    setTimeout(()=>{
+      let d=msgs2[mi2].length;
+      function erase(){if(d>=0){el.innerHTML=msgs2[mi2].slice(0,d)+'<span class="cursor">|</span>';d--;setTimeout(erase,25);}else{mi2=(mi2+1)%msgs2.length;ci2=0;setTimeout(type2,400);}}
+      setTimeout(erase,2200);
+    },1200);
+  }
+}
+
+/* ── Click ripple + heart ── */
+const rippleEl=document.getElementById('rippleEl');
+document.addEventListener('click',e=>{
+  const r=document.createElement('div');r.className='ripple';
+  const size=80;
+  r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-size/2}px;top:${e.clientY-size/2}px;`;
+  rippleEl.appendChild(r);
+  setTimeout(()=>r.remove(),800);
+  const f=document.createElement('div');f.className='floater';
+  f.textContent=fEmoji[Math.floor(Math.random()*fEmoji.length)];
+  f.style.cssText=`left:${e.clientX}px;bottom:${window.innerHeight-e.clientY}px;font-size:22px;animation-duration:2.5s;animation-delay:0s;position:fixed;`;
+  floatersEl.appendChild(f);
+  setTimeout(()=>f.remove(),2600);
+});
+
+const music = document.getElementById("bgMusic");
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+/* ── Swipe support ── */
+let touchX=0;
+document.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const diff=touchX-e.changedTouches[0].clientX;
+  if(Math.abs(diff)>50){goTo(diff>0?Math.min(1,currentPage+1):Math.max(0,currentPage-1));}
+});
+</script>
+</body>
+</html>
